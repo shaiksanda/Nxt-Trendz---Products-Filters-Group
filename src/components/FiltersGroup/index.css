@@ -1,0 +1,43 @@
+.filter-category {
+  font-weight: 200;
+}
+
+.filter-category:hover {
+  font-weight: bolder;
+  transform: scale(1.02);
+  text-decoration: underline;
+  cursor: pointer;
+  color: dodgerblue;
+  font-size: 18px;
+}
+
+.rating-icon {
+  width: 120px;
+  margin-right: 20px;
+}
+
+.rating-item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.clear-filters-button {
+  margin: 50px 0px 0px 0px;
+  width: 150px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background-color: brown;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  color: wheat;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.clear-filters-button:hover {
+  background: linear-gradient(to right, dodgerblue, skyblue);
+  color: white;
+}
