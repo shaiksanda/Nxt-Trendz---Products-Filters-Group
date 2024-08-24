@@ -60,6 +60,7 @@ class LoginForm extends Component {
         <label className="input-label" htmlFor="password">
           PASSWORD
         </label>
+        <br />
         <input
           type="password"
           id="password"
@@ -80,6 +81,7 @@ class LoginForm extends Component {
         <label className="input-label" htmlFor="username">
           USERNAME
         </label>
+        <br />
         <input
           type="text"
           id="username"
@@ -88,6 +90,7 @@ class LoginForm extends Component {
           onChange={this.onChangeUsername}
           placeholder="Username"
         />
+        <br />
       </>
     )
   }
