@@ -1,10 +1,24 @@
 import './index.css'
 
 const FiltersGroup = props => {
-  const {categoryOptions, ratingsList, onChangeCategory} = props
+  const {
+    categoryOptions,
+    ratingsList,
+    onChangeCategory,
+    onClickRating,
+    onClearFilters,
+  } = props
 
   const handleCategory = categoryId => () => {
     onChangeCategory(categoryId)
+  }
+
+  const handleRating = ratingId => () => {
+    onClickRating(ratingId)
+  }
+
+  const handleFilters = () => {
+    onClearFilters()
   }
 
   return (
@@ -19,17 +33,22 @@ const FiltersGroup = props => {
         </p>
       ))}
       {ratingsList.map(each => (
-        <div key={each.ratingId} className="rating-item">
+        <li key={each.ratingId} className="rating-item">
           <img
+            onClick={handleRating(each.ratingId)}
             src={each.imageUrl}
             alt={`rating ${each.ratingId}`}
             className="rating-icon"
           />
           <p>& up</p>
-        </div>
+        </li>
       ))}
 
-      <button className="clear-filters-button" type="button">
+      <button
+        onClick={handleFilters}
+        className="clear-filters-button"
+        type="button"
+      >
         Clear Filters
       </button>
     </div>

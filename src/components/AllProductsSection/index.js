@@ -71,8 +71,9 @@ class AllProductsSection extends Component {
     isLoading: false,
     activeOptionId: sortbyOptions[0].optionId,
     searchInput: '',
-    category: null,
+    category: '',
     isFailure: false,
+    rating: '',
   }
 
   componentDidMount() {
@@ -87,11 +88,15 @@ class AllProductsSection extends Component {
 
     // TODO: Update the code to get products with filters applied
 
-    const {activeOptionId, searchInput, category} = this.state
+    const {activeOptionId, searchInput, category, rating} = this.state
 
-    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&title_search=${searchInput}${
-      category ? `&category=${category}` : ''
+    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}${
+      searchInput ? `&title_search=${searchInput}` : ''
+    }${category ? `&category=${category}` : ''}${
+      rating ? `&rating=${rating}` : ''
     }`
+
+    console.log('API URL:', apiUrl) // Log the API URL
 
     const options = {
       headers: {
@@ -113,6 +118,7 @@ class AllProductsSection extends Component {
       this.setState({
         productsList: updatedData,
         isLoading: false,
+        isFailure: false,
       })
     } else {
       this.setState({isFailure: true, isLoading: false})
@@ -131,11 +137,19 @@ class AllProductsSection extends Component {
     this.setState({category: categoryId}, this.getProducts)
   }
 
+  onClickRating = ratingId => {
+    this.setState({rating: ratingId}, this.getProducts)
+  }
+
+  onClearFilters = () => {
+    this.setState({searchInput: '', rating: '', category: ''}, this.getProducts)
+  }
+
   renderFailureView = () => (
     <div className="failure-view">
       <img
         src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-failure-view.png"
-        alt="failure"
+        alt="products failure"
       />
       <h1 style={{color: 'red', margin: '4px'}}>Something Went Wrong</h1>
       <p>We Could Not fetch the products. Please try again later.</p>
@@ -166,6 +180,8 @@ class AllProductsSection extends Component {
               categoryOptions={categoryOptions}
               ratingsList={ratingsList}
               onChangeCategory={this.onChangeCategory}
+              onClickRating={this.onClickRating}
+              onClearFilters={this.onClearFilters}
             />
           </div>
           <ul className="products-list">
